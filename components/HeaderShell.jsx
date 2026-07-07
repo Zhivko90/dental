@@ -8,7 +8,16 @@ export default function HeaderShell({ children }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 24);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -19,9 +28,9 @@ export default function HeaderShell({ children }) {
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <div
-        className={`w-full border-b transition-all duration-300 ${
+        className={`w-full border-b transition-colors duration-300 ${
           scrolled
-            ? "border-white/40 bg-porcelain/70 shadow-soft backdrop-blur-xl"
+            ? "border-white/40 bg-[#eaf3fb] shadow-soft"
             : "border-transparent bg-transparent"
         }`}
       >
