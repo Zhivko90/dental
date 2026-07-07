@@ -1,0 +1,21 @@
+# зависимости
+/node_modules
+
+# Next.js
+/.next
+/out
+
+# продукция
+/build
+
+# тайни (ВАЖНО — да не изтичат ключовете)
+.env
+.env*.local
+
+# лог/системни
+npm-debug.log*
+.DS_Store
+*.pem
+
+# Sanity
+/dist
